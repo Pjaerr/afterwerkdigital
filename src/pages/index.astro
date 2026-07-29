@@ -1,17 +1,357 @@
 ---
-
+import Logo from '../components/Logo.astro';
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Afterwerk Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --ink: #2c3e50;
+        --ink-muted: color-mix(in oklab, var(--ink) 90%, white);
+        --surface: #fff;
+        --page: #f5f6f8;
+        --accent: #1d4fc4;
+        --shadow-border:
+          0 0 0 1px oklch(0 0 0 / 0.06),
+          0 1px 2px -1px oklch(0 0 0 / 0.06),
+          0 2px 4px 0 oklch(0 0 0 / 0.04);
+        --shadow-border-hover:
+          0 0 0 1px oklch(0 0 0 / 0.08),
+          0 4px 12px -2px oklch(0 0 0 / 0.1),
+          0 8px 24px -4px oklch(0 0 0 / 0.06);
+        --ease-out: cubic-bezier(0.2, 0, 0, 1);
+      }
+
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        font-family: 'IBM Plex Sans', system-ui, sans-serif;
+        background:
+          radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in oklab, #1d4fc4 8%, transparent), transparent 70%),
+          radial-gradient(ellipse 60% 40% at 100% 100%, color-mix(in oklab, #f5a623 6%, transparent), transparent 60%),
+          var(--page);
+        color: var(--ink);
+        padding: 3rem 1.5rem 6rem;
+        line-height: 1.6;
+        min-height: 100dvh;
+      }
+
+      .container {
+        max-width: 66ch;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .logo {
+        display: block;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+      }
+
+      .about {
+        font-size: 1rem;
+        color: var(--ink-muted);
+        margin-bottom: 3rem;
+        text-wrap: pretty;
+        text-align: center;
+      }
+
+      .about a {
+        color: inherit;
+        text-decoration: underline;
+        text-decoration-color: color-mix(in oklab, var(--ink-muted) 35%, transparent);
+        text-underline-offset: 0.2em;
+        text-decoration-thickness: 1px;
+        transition-property: color, text-decoration-color;
+        transition-duration: 150ms;
+        transition-timing-function: ease-out;
+      }
+
+      .about a:hover {
+        color: var(--accent);
+        text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent);
+      }
+
+      .about a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      .projects {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .project {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 1.125rem 1.25rem;
+        border-radius: 14px;
+        background: var(--surface);
+        box-shadow: var(--shadow-border);
+        text-decoration: none;
+        color: inherit;
+        transition-property: box-shadow, transform;
+        transition-duration: 180ms;
+        transition-timing-function: var(--ease-out);
+      }
+
+      .project:hover {
+        box-shadow: var(--shadow-border-hover);
+        transform: translateY(-2px);
+      }
+
+      .project:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .project:active {
+        transform: translateY(0) scale(0.96);
+        box-shadow: var(--shadow-border);
+        transition-duration: 80ms;
+      }
+
+      .project-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        flex-shrink: 0;
+        outline: 1px solid oklch(0 0 0 / 0.1);
+        outline-offset: -1px;
+        transition-property: transform;
+        transition-duration: 180ms;
+        transition-timing-function: var(--ease-out);
+      }
+
+      .project:hover .project-logo {
+        transform: scale(1.04);
+      }
+
+      .project:active .project-logo {
+        transform: scale(1);
+      }
+
+      .project-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .project-name {
+        font-size: 0.9375rem;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition-property: color;
+        transition-duration: 150ms;
+        transition-timing-function: ease-out;
+      }
+
+      .project:hover .project-name {
+        color: var(--accent);
+      }
+
+      .project-name .ext-icon {
+        opacity: 0.35;
+        flex-shrink: 0;
+        color: currentColor;
+        transform: scale(1);
+        filter: blur(0);
+        transition-property: opacity, transform, filter;
+        transition-duration: 200ms;
+        transition-timing-function: var(--ease-out);
+      }
+
+      .project:hover .ext-icon {
+        opacity: 0.85;
+        transform: scale(1) translate(1px, -1px);
+        filter: blur(0);
+      }
+
+      .project-desc {
+        font-size: 0.875rem;
+        color: var(--ink-muted);
+        text-wrap: pretty;
+      }
+
+      /* Staggered page enter — infrequent, hierarchy-first.
+         Cards animate opacity/filter only so transform stays free for hover/press. */
+      .enter {
+        opacity: 0;
+        transform: translateY(12px);
+        filter: blur(4px);
+        animation: fadeInUp 420ms var(--ease-out) forwards;
+      }
+
+      .enter-1 { animation-delay: 0ms; }
+      .enter-2 { animation-delay: 100ms; }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      @keyframes fadeInSoft {
+        to {
+          opacity: 1;
+          filter: blur(0);
+        }
+      }
+
+      .projects .project {
+        opacity: 0;
+        filter: blur(4px);
+        animation: fadeInSoft 420ms var(--ease-out) forwards;
+      }
+
+      .projects .project:nth-child(1) { animation-delay: 200ms; }
+      .projects .project:nth-child(2) { animation-delay: 280ms; }
+      .projects .project:nth-child(3) { animation-delay: 360ms; }
+      .projects .project:nth-child(4) { animation-delay: 440ms; }
+      .projects .project:nth-child(5) { animation-delay: 520ms; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .enter,
+        .projects .project {
+          opacity: 1;
+          transform: none;
+          filter: none;
+          animation: none;
+        }
+
+        .project,
+        .project-logo,
+        .project-name,
+        .project-name .ext-icon,
+        .about a {
+          transition: none;
+        }
+
+        .project:hover,
+        .project:active,
+        .project:hover .project-logo,
+        .project:hover .ext-icon {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header enter enter-1">
+        <Logo class="logo" width={240} />
+        <h1>Afterwerk Digital</h1>
+      </header>
+
+      <p class="about enter enter-2">
+        Afterwerk Digital builds clean and focused products that do one thing well. No clutter or noise, just useful software that respects your time. If you need help with any of our products, please reach out to <a href="mailto:contact@joshuaj.co.uk">contact@joshuaj.co.uk</a>
+      </p>
+
+      <div class="projects">
+        <a href="https://pomodorotimer.work" class="project" target="_blank" rel="noopener noreferrer">
+          <img class="project-logo" src="/assets/pomodorotimer.svg" alt="" width="40" height="40" />
+          <div class="project-info">
+            <div class="project-name">
+              Pomodoro Timer
+              <svg class="ext-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V8.5M7 1h4m0 0v4m0-4L5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="project-desc">A Pomodoro timer with a clean UI and detailed reports on your productivity.</div>
+          </div>
+        </a>
+
+        <a href="https://simplemindmap.com" class="project" target="_blank" rel="noopener noreferrer">
+          <img class="project-logo" src="/assets/simplemindmap.svg" alt="" width="40" height="40" />
+          <div class="project-info">
+            <div class="project-name">
+              Simple Mindmap
+              <svg class="ext-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V8.5M7 1h4m0 0v4m0-4L5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="project-desc">A simple online mind mapping tool. Created as all the other tools were either too clunky or required a signup.</div>
+          </div>
+        </a>
+
+        <a href="https://apps.apple.com/gb/app/budget-app-simple-spending/id6745130377" class="project">
+          <img class="project-logo" src="/assets/simplemoneytracker.svg" alt="" width="40" height="40" />
+          <div class="project-info">
+            <div class="project-name">
+              Simple Money Tracker
+              <svg class="ext-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V8.5M7 1h4m0 0v4m0-4L5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="project-desc">A simple spending/savings tracking app. Built as a manual alternative to automated budgeting apps, without the ugliness of a spreadsheet.</div>
+          </div>
+        </a>
+
+        <a href="https://apps.apple.com/gb/app/simple-food-tracker/id6739615392" class="project">
+          <img class="project-logo" src="/assets/simplefoodjournal.svg" alt="" width="40" height="40" />
+          <div class="project-info">
+            <div class="project-name">
+              Simple Food Journal
+              <svg class="ext-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V8.5M7 1h4m0 0v4m0-4L5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="project-desc">A simple food logging app. Created as a mindful alternative to the complicated calorie tracking apps.</div>
+          </div>
+        </a>
+
+        <a href="https://apps.apple.com/gb/app/countdown-widget-reminders/id6758889790" class="project">
+          <img class="project-logo" src="/assets/countdownapp.svg" alt="" width="40" height="40" />
+          <div class="project-info">
+            <div class="project-name">
+              Countdown App &amp; Reminders
+              <svg class="ext-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3.5 2H2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V8.5M7 1h4m0 0v4m0-4L5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="project-desc">Never miss what matters. Whether it's a holiday, a birthday, or your last day at work, keep all your important dates in one place and know exactly how long until they arrive. All offline in one simple package, no ads, no subscriptions.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </body>
 </html>

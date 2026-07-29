@@ -1,0 +1,49 @@
+---
+interface Props {
+  class?: string;
+  width?: number | string;
+  height?: number | string;
+}
+
+const { class: className, width, height } = Astro.props;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1024 670"
+  fill="none"
+  class={className}
+  width={width}
+  height={height}
+  aria-label="Afterwerk Digital logo"
+  role="img"
+>
+  <defs>
+    <linearGradient id="arcGrad1" x1="512" y1="200" x2="512" y2="660" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1D4FC4"/>
+      <stop offset="100%" stop-color="#F5A623"/>
+    </linearGradient>
+    <linearGradient id="arcGrad2" x1="512" y1="310" x2="512" y2="660" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6E9ABF"/>
+      <stop offset="100%" stop-color="#F5A623"/>
+    </linearGradient>
+    <linearGradient id="arcGrad3" x1="512" y1="430" x2="512" y2="660" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5A623"/>
+      <stop offset="100%" stop-color="#F5A623"/>
+    </linearGradient>
+    <clipPath id="aboveBaseline">
+      <rect x="0" y="0" width="1024" height="660"/>
+    </clipPath>
+  </defs>
+
+  <line x1="28" y1="660" x2="996" y2="660" stroke="#F5A623" stroke-width="10" stroke-linecap="round"/>
+
+  <g clip-path="url(#aboveBaseline)">
+    <path d="M 88 660 A 424 424 0 0 1 936 660"
+          stroke="url(#arcGrad1)" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <path d="M 232 680 L 232 660 A 280 280 0 0 1 792 660 L 792 680"
+          stroke="url(#arcGrad2)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M 352 680 L 352 660 A 160 160 0 0 1 672 660 L 672 680"
+          stroke="url(#arcGrad3)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>
