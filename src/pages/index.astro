@@ -210,54 +210,7 @@ import Logo from '../components/Logo.astro';
         text-wrap: pretty;
       }
 
-      /* Staggered page enter — infrequent, hierarchy-first.
-         Cards animate opacity/filter only so transform stays free for hover/press. */
-      .enter {
-        opacity: 0;
-        transform: translateY(12px);
-        filter: blur(4px);
-        animation: fadeInUp 420ms var(--ease-out) forwards;
-      }
-
-      .enter-1 { animation-delay: 0ms; }
-      .enter-2 { animation-delay: 100ms; }
-
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-          filter: blur(0);
-        }
-      }
-
-      @keyframes fadeInSoft {
-        to {
-          opacity: 1;
-          filter: blur(0);
-        }
-      }
-
-      .projects .project {
-        opacity: 0;
-        filter: blur(4px);
-        animation: fadeInSoft 420ms var(--ease-out) forwards;
-      }
-
-      .projects .project:nth-child(1) { animation-delay: 200ms; }
-      .projects .project:nth-child(2) { animation-delay: 280ms; }
-      .projects .project:nth-child(3) { animation-delay: 360ms; }
-      .projects .project:nth-child(4) { animation-delay: 440ms; }
-      .projects .project:nth-child(5) { animation-delay: 520ms; }
-
       @media (prefers-reduced-motion: reduce) {
-        .enter,
-        .projects .project {
-          opacity: 1;
-          transform: none;
-          filter: none;
-          animation: none;
-        }
-
         .project,
         .project-logo,
         .project-name,
@@ -277,12 +230,12 @@ import Logo from '../components/Logo.astro';
   </head>
   <body>
     <div class="container">
-      <header class="header enter enter-1">
+      <header class="header">
         <Logo class="logo" width={240} />
         <h1>Afterwerk Digital</h1>
       </header>
 
-      <p class="about enter enter-2">
+      <p class="about">
         Afterwerk Digital builds clean and focused products that do one thing well. No clutter or noise, just useful software that respects your time. If you need help with any of our products, please reach out to <a href="mailto:contact@joshuaj.co.uk">contact@joshuaj.co.uk</a>
       </p>
 
